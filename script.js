@@ -2,6 +2,36 @@ window.onload = function () {
     document.getElementById("scanner").focus();
 };
 
+function uploadPicklist() {
+    let fileInput = document.getElementById("picklistUpload");
+    let statusText = document.getElementById("uploadStatus");
+    let file = fileInput.files[0];
+
+    if (!file) {
+        statusText.textContent = "⚠️ No file selected. Please choose a CSV file.";
+        return;
+    }
+
+    let reader = new FileReader();
+    reader.onload = function (event) {
+        let csvContent = event.target.result;
+
+        if (!csvContent.trim()) {
+            statusText.textContent = "⚠️ File is empty. Please upload a valid CSV.";
+            return;
+        }
+
+        statusText.textContent = "✅ File uploaded successfully!";
+        parseCSV(csvContent);
+    };
+
+    reader.onerror = function () {
+        statusText.textContent = "⚠️ Error reading the file. Try again.";
+    };
+
+    reader.readAsText(file);
+}
+
 function highlightNextIMEI() {
     currentIndex = orders.findIndex(order => 
         !document.getElementById(`row-${orders.indexOf(order)}`).classList.contains("green")
