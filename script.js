@@ -97,11 +97,13 @@ function highlightNextIMEI() {
     });
 
     // ✅ Find the first unscanned IMEI and highlight it yellow
-    currentIndex = orders.findIndex(order => 
+    let nextIndex = orders.findIndex(order => 
         !document.getElementById(`row-${orders.indexOf(order)}`).classList.contains("green")
     );
-    if (currentIndex === -1) currentIndex = orders.length - 1;
 
+    if (nextIndex === -1) return; // No more pending IMEIs
+
+    currentIndex = nextIndex;
     let activeRow = document.getElementById(`row-${currentIndex}`);
     if (activeRow) activeRow.classList.add("next");
 }
@@ -116,6 +118,10 @@ function checkIMEI() {
         resultRow.classList.remove("next", "red", "orange");
         resultRow.classList.add("green");
         resultRow.removeAttribute("onclick");
+
+        skippedOrders = skippedOrders.filter(entry => entry.index !== currentIndex);
+        updateSkippedList();
+
         moveToNextUnscannedIMEI();
     } else {
         resultRow.classList.add("red");
@@ -142,11 +148,13 @@ function skipIMEI() {
 
 // ✅ Move to Next Unscanned IMEI
 function moveToNextUnscannedIMEI() {
-    currentIndex = orders.findIndex(order => 
+    let nextIndex = orders.findIndex(order => 
         !document.getElementById(`row-${orders.indexOf(order)}`).classList.contains("green")
     );
-    if (currentIndex === -1) currentIndex = orders.length - 1;
 
+    if (nextIndex === -1) return; // No more pending IMEIs
+
+    currentIndex = nextIndex;
     highlightNextIMEI();
 }
 
