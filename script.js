@@ -13,7 +13,7 @@ function uploadPicklist() {
     let file = fileInput.files[0];
 
     if (!file) {
-        alert("⚠️ No file selected. Please choose a CSV file.");
+        statusText.textContent = "⚠️ No file selected. Please choose a CSV file.";
         return;
     }
 
@@ -21,15 +21,20 @@ function uploadPicklist() {
     reader.onload = function (event) {
         let csvContent = event.target.result;
         if (!csvContent.trim()) {
-            alert("⚠️ File is empty. Please upload a valid CSV.");
+            statusText.textContent = "⚠️ File is empty. Please upload a valid CSV.";
             return;
         }
-      alert("✅ File uploaded successfully!");
-    
+        statusText.textContent = "✅ File uploaded successfully!";
+
+        // ✅ Automatically clear message after 3 seconds
+        setTimeout(() => {
+            statusText.textContent = "";
+        }, 3000);
+
         parseCSV(csvContent);
     };
     reader.onerror = function () {
-        alert("⚠️ Error reading the file. Try again.");
+        statusText.textContent = "⚠️ Error reading the file. Try again.";
     };
     reader.readAsText(file);
 }
@@ -97,12 +102,12 @@ function highlightNextIMEI() {
         }
     });
 
-    // ✅ Find the first unscanned IMEI and highlight it yellow
-    let nextIndex = orders.findIndex(order => 
-        !document.getElementById(`row-${orders.indexOf(order)}`).classList.contains("green")
+    let nextIndex = orders.findIndex((_, index) => 
+        !document.getElementById(`row-${index}`).classList.contains("green") &&
+        !document.getElementById(`row-${index}`).classList.contains("orange")
     );
 
-    if (nextIndex === -1) return; // No more pending IMEIs
+    if (nextIndex === -1) return;
 
     currentIndex = nextIndex;
     let activeRow = document.getElementById(`row-${currentIndex}`);
@@ -149,11 +154,12 @@ function skipIMEI() {
 
 // ✅ Move to Next Unscanned IMEI
 function moveToNextUnscannedIMEI() {
-    let nextIndex = orders.findIndex(order => 
-        !document.getElementById(`row-${orders.indexOf(order)}`).classList.contains("green")
+    let nextIndex = orders.findIndex((_, index) => 
+        !document.getElementById(`row-${index}`).classList.contains("green") &&
+        !document.getElementById(`row-${index}`).classList.contains("orange")
     );
 
-    if (nextIndex === -1) return; // No more pending IMEIs
+    if (nextIndex === -1) return;
 
     currentIndex = nextIndex;
     highlightNextIMEI();
