@@ -10,6 +10,7 @@ window.onload = function () {
 function uploadPicklist() {
     let fileInput = document.getElementById("picklistUpload");
     let statusText = document.getElementById("uploadStatus");
+    let uploadSection = document.getElementById("uploadSection"); // ✅ Get Upload Section
     let file = fileInput.files[0];
 
     if (!file) {
@@ -29,6 +30,7 @@ function uploadPicklist() {
         // ✅ Automatically clear message after 3 seconds
         setTimeout(() => {
             statusText.textContent = "";
+            uploadSection.style.display = "none"; // ✅ Hide Upload Section
         }, 3000);
 
         parseCSV(csvContent);
