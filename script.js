@@ -13,7 +13,7 @@ function uploadPicklist() {
     let file = fileInput.files[0];
 
     if (!file) {
-        statusText.textContent = "⚠️ No file selected. Please choose a CSV file.";
+        alert("⚠️ No file selected. Please choose a CSV file.");
         return;
     }
 
@@ -21,7 +21,7 @@ function uploadPicklist() {
     reader.onload = function (event) {
         let csvContent = event.target.result;
         if (!csvContent.trim()) {
-            statusText.textContent = "⚠️ File is empty. Please upload a valid CSV.";
+            alert("⚠️ File is empty. Please upload a valid CSV.");
             return;
         }
       alert("✅ File uploaded successfully!");
@@ -29,7 +29,7 @@ function uploadPicklist() {
         parseCSV(csvContent);
     };
     reader.onerror = function () {
-        statusText.textContent = "⚠️ Error reading the file. Try again.";
+        alert("⚠️ Error reading the file. Try again.");
     };
     reader.readAsText(file);
 }
