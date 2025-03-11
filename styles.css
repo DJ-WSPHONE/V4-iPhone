@@ -1,92 +1,78 @@
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 0;
     padding: 10px;
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden; /* Prevent side scrolling */
 }
 
-/* Ensure better spacing for small screens */
 .container {
     width: 95%;
     margin: auto;
     text-align: left;
 }
 
-/* Style the table for mobile */
-.table-container {
-    overflow-x: auto;
-    max-width: 100vw;
-}
-
-/* Fix table headers when scrolling */
-thead {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 2;
-}
-
-/* Table appearance */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
-    margin-top: 15px;
-}
-
-th, td {
+input[type="text"], button, input[type="file"] {
+    font-size: 18px;
     padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
+    margin: 8px 0;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Highlighting IMEIs */
-.next { background-color: #FFD700; } /* Bright Yellow */
-.green { background-color: #32CD32; } /* Bright Green */
-.red { background-color: #FF4500; } /* Bright Red */
-.orange { background-color: #FFA500; } /* Bright Orange */
-
-/* Make buttons larger for mobile */
 button {
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
     background-color: #007BFF;
     color: white;
-    padding: 14px;
-    font-size: 18px;
-    width: 90%;
-    max-width: 400px;
-    margin: 10px auto;
-    display: block;
+    border: none;
+    cursor: pointer;
 }
 
-/* Button hover effect */
 button:hover {
     background-color: #0056b3;
 }
 
-/* Improve tap area for input */
-input[type="text"] {
-    border: 2px solid #007BFF;
-    border-radius: 8px;
-    padding: 14px;
-    font-size: 18px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
 }
 
-/* Flash Red Animation for Incorrect Scan */
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.next {
+    background-color: yellow;
+}
+
+.green {
+    background-color: lightgreen;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: lightcoral;
+}
+
+/* Flash Red Animation */
 @keyframes flashRed {
     0% { background-color: red; }
     50% { background-color: #ff9999; }
     100% { background-color: red; }
 }
+
 .error {
     animation: flashRed 0.5s alternate;
     animation-iteration-count: 4;
