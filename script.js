@@ -24,7 +24,8 @@ function uploadPicklist() {
             statusText.textContent = "⚠️ File is empty. Please upload a valid CSV.";
             return;
         }
-        statusText.textContent = "✅ File uploaded successfully!";
+      alert("✅ File uploaded successfully!");
+    
         parseCSV(csvContent);
     };
     reader.onerror = function () {
