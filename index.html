@@ -9,6 +9,12 @@
     <div class="container">
         <h1>IMEI Pick List Scanner</h1>
 
+        <div id="uploadSection">
+    <input type="file" id="picklistUpload">
+    <button onclick="uploadPicklist()">Upload</button>
+    <p id="uploadStatus"></p>
+</div>
+
         <input type="text" id="scanner" placeholder="Scan IMEI Here..." oninput="handleKeyPress(event)">
         <button onclick="checkIMEI()">Enter</button>
         <button onclick="skipIMEI()">Skip</button>
